@@ -43,7 +43,7 @@ var Avatar = React.createClass({
             </div>
         )
     }
-})
+});
 
 ReactDOM.render(
     <Avatar user={USER_DATA} />,
