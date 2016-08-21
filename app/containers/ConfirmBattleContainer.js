@@ -17,7 +17,10 @@ var ConfirmBattleContainer = React.createClass({
     },
     render: function() {
         return (
-            <ConfirmBattle />
+            <ConfirmBattle
+                isLoading={this.state.isLoading}
+                playersInfo={this.state.playersInfo} 
+            />
         )
     }
 });
