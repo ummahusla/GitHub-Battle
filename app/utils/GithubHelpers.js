@@ -13,12 +13,12 @@ function getRepos(username) {
 }
 
 function getTotalStars(repos) {
-    return repos.data.reduce(function(prev, current) {
+    return repos.data.reduce(function (prev, current) {
         return prev + current.stargazers_count;
     }, 0);
 }
 
-function getPlayerData(player) {
+function getPlayersData(player) {
     return getRepos(player.login)
         .then(getTotalStars)
         .then(function(totalStars) {
@@ -49,8 +49,15 @@ var helpers = {
         });
     },
     battle: function(players) {
+       var playerOneData = getPlayersData(players[0]);
+       var playerTwoData = getPlayersData(players[1]);
 
-    }
+       return axios.all([playerOneData, playerTwoData])
+         .then(calculateScores)
+         .catch(function (err) {
+             console.warn('Error in getPlayersInfo: ', err);
+         });
+     }
 };
 
 module.exports = helpers;
