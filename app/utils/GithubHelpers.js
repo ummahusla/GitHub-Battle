@@ -9,21 +9,31 @@ function getUserInfo(username) {
 }
 
 function getRepos(username) {
-    // Fetch all repos by username
+    return axios.get('https://api.github.com/users/' + username + '/repos' + param + '&per_page=100');
 }
 
-function getTotalStars(stars) {
-    // Calculate all the stars that user has
+function getTotalStars(repos) {
+    return repos.data.reduce(function(prev, current) {
+        return prev + current.stargazers_count;
+    }, 0);
 }
 
 function getPlayerData(player) {
-    // Get repos
-    // geTotalStars
-    // return object with that data
+    return getRepos(player.login)
+        .then(getTotalStars)
+        .then(function(totalStars) {
+            return {
+                followers: player.followers,
+                totalStars: totalStars
+            };
+        });
 }
 
 function calculateScores(players) {
-    // Return an array, after calculations in order to determine the winner
+    return [
+        players[0].followers * 3 + players[0].totalStars,
+        players[1].followers * 3 + players[1].totalStars
+    ];
 }
 
 var helpers = {
