@@ -15,7 +15,7 @@ var ConfirmBattleContainer = React.createClass({
     componentDidMount: function() {
         // Fetch info github then update the state
         var query = this.props.location.query;
-        githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
+        GithubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
             .then(function (players) {
                 this.setState({
                     isLoading: false,
