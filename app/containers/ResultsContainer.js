@@ -1,5 +1,6 @@
 var React = require('react');
-var Results = require('../componments/Results');
+var Results = require('../components/Results');
+var GithubHelpers = require('../utils/GithubHelpers');
 
 var ResultsContainer = React.createClass({
     getInitialState: function() {
@@ -7,6 +8,9 @@ var ResultsContainer = React.createClass({
             isLoading: true,
             scores: []
         }
+    },
+    componentDidMount: function() {
+        console.log(this.props);
     },
     render: function() {
         return (
