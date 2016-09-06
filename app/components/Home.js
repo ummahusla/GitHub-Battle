@@ -2,6 +2,7 @@ var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 var MainContainer = require('./MainContainer');
+var transparentBg = require('../styles').transparentBg;
 
 var Home = React.createClass({
     render: function () {

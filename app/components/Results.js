@@ -5,6 +5,7 @@ var UserDetailsWrapper = require('./UserDetailsWrapper');
 var UserDetails = require('./UserDetails');
 var Link = require('react-router').Link;
 var MainContainer = require('./MainContainer');
+var Loading = require('./Loading');
 
 function StartOver() {
     return (
@@ -20,8 +21,8 @@ function StartOver() {
 function Results(props) {
 
     if(props.isLoading === true) {
-        return(
-            <p> LOADING! </p>
+        return (
+            <Loading speed={100} text='One Moment' />
         )
     }
 
@@ -39,7 +40,7 @@ function Results(props) {
     return (
         <MainContainer>
             <h1>Results</h1>
-            <div className="col-sm-8 col-sm-offset-2">
+            <div className="col-sm-8 col-sm-offset-2 text-center">
                 <UserDetailsWrapper header="Winner">
                     <UserDetails score={props.scores[winningIndex]} info={props.playersInfo[winningIndex]} />
                 </UserDetailsWrapper>
