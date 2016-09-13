@@ -1,5 +1,7 @@
 var axios = require('axios');
+var logCustomMessage = require('./logCustomMessage');
 
+// GitHub API Credentials
 var id = "YOUR_CLIENT_ID";
 var sec = "YOUR_SECRET_ID";
 var param = "?client_id=" + id + "&client_secret=" + sec;
@@ -45,7 +47,10 @@ var helpers = {
                 return user.data;
             });
         }).catch(function(error) {
-            console.warn('Error in getPlayersInfo', error);
+            return logCustomMessage(error.statusText, {
+                players: players,
+                error: error
+            });
         });
     },
     battle: function(players) {
@@ -54,8 +59,11 @@ var helpers = {
 
        return axios.all([playerOneData, playerTwoData])
          .then(calculateScores)
-         .catch(function (err) {
-             console.warn('Error in getPlayersInfo: ', err);
+         .catch(function(error) {
+             return logCustomMessage(error.statusText, {
+                 players: players,
+                 error: error
+             });
          });
      }
 };
